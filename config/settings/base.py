@@ -82,6 +82,7 @@ THIRD_PARTY_APPS = [
 LOCAL_APPS = [
     "icdot.users",
     "icdot.transplants",
+    "icdot.histomx",
     # Your stuff: custom apps go here
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
@@ -290,6 +291,7 @@ IMPORT_EXPORT_USE_TRANSACTIONS = True
 IMPORT_EXPORT_IMPORT_PERMISSION_CODE = "add"
 IMPORT_EXPORT_EXPORT_PERMISSION_CODE = "view"
 
+HISTOMX_SERVICE_URL = env("HISTOMX_SERVICE_URL", None)
 
 # Monkey-patching django to have saner(?) defaults on time based inputs.
 # See https://code.djangoproject.com/ticket/16630#comment:12 as to why
