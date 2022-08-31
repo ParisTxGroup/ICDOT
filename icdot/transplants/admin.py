@@ -28,9 +28,11 @@ class HistologyAdmin(ImportExportModelAdmin):
     fieldsets = fieldsets.histology.DEFAULT
 
 
-@admin.register(models.FileUpload)
-class FileUploadAdmin(ImportExportModelAdmin):
-    pass
+# Single file-upload is disabled because it is confusing to users.
+# We usually want them to use inline or batches instead.
+# @admin.register(models.FileUpload)
+# class FileUploadAdmin(ImportExportModelAdmin):
+#     pass
 
 
 class FileUploadInline(admin.TabularInline):
