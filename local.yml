@@ -12,6 +12,7 @@ services:
     image: icdot_local_django
     container_name: django
     depends_on:
+      - histomx
       - postgres
       - mailhog
     volumes:
@@ -22,6 +23,13 @@ services:
     ports:
       - "8000:8000"
     command: /start
+
+  histomx:
+    build:
+      context: .
+      dockerfile: ./compose/local/histomx/Dockerfile
+    image: icdot_local_histomx
+    container_name: histomx
 
   postgres:
     build:

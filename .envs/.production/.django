@@ -6,6 +6,10 @@ DJANGO_SECRET_KEY=!!!SET DJANGO_SECRET_KEY!!!
 DJANGO_ADMIN_URL=!!!SET DJANGO_ADMIN_URL!!!
 DJANGO_ALLOWED_HOSTS=icdot.org
 
+# Histomx service
+# ------------------------------------------------------------------------------
+HISTOMX_SERVICE_URL=http://histomx/
+
 # Security
 # ------------------------------------------------------------------------------
 # TIP: better off using DNS, however, redirect is OK too
