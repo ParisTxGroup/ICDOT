@@ -10,7 +10,7 @@ from icdot.users.models import UserScopedModel
 
 class Histology(UserScopedModel):
     class Meta:
-        verbose_name_plural = "histologies"
+        verbose_name_plural = "histology"
 
     class ClinicalBiopsyIndication(models.TextChoices):
         PROTOCOL = "protocol", _("protocol")
