@@ -12,12 +12,20 @@ services:
       dockerfile: ./compose/production/django/Dockerfile
     image: icdot_production_django
     depends_on:
+      - histomx
       - postgres
       - redis
     env_file:
       - ./.envs/.production/.django
       - ./.envs/.production/.postgres
     command: /start
+
+  histomx:
+    build:
+      context: .
+      dockerfile: ./compose/local/histomx/Dockerfile
+    image: icdot_production_histomx
+    container_name: histomx
 
   postgres:
     build:

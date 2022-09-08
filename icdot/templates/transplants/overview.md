@@ -13,7 +13,7 @@ Fields names ending in `_ref` indicate references.
 
 On this website references are identifiers that are specific to the user
 that is uploading the data. This website does not make any assumptions
-about references exceppt that they are strings.
+about references except that they are strings.
 
 ## How things are identified
 

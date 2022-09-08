@@ -5,8 +5,9 @@ services:
     build:
       context: .
       dockerfile: ./compose/production/django/Dockerfile
-    image: ghcr.io/ParisTxGroup/icdot_production_django
+    image: ghcr.io/paristxgroup/icdot_production_django
     depends_on:
+      - histomx
       - redis
     env_file:
       - ./.envs/.production/.django
@@ -19,7 +20,20 @@ services:
     ports:
       - 0.0.0.0:80:5000
     extra_hosts:
-      - host.docker.internal:postgres
+      - postgres:host-gateway
+
+  histomx:
+    build:
+      context: .
+      dockerfile: ./compose/local/histomx/Dockerfile
+    image: ghcr.io/paristxgroup/icdot_production_histomx
+    container_name: histomx
+    environment:
+      - HISTOMX_RMD_PATH=/histomx/scripts/histomx_kidney.Rmd
+    volumes:
+      # Sadly rmarkdown must have rw access to be able to knit.
+      # As long as we're running only trusted code that's fine.
+      - /fs1/app/histomx:/histomx:rw
 
   redis:
     image: redis:6

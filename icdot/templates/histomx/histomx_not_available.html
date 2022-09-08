@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Histomx{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="alert alert-warning" role="alert">
+    Unfortunately Histomx is not available on this ICDOT installation.
+
+    {% if attempted_url %}
+    <hr>
+    <p>
+      ICDOT is configured to reach Histomx at <code>{{attempted_url}}</code>.<br/>
+      That does not seem to be working. If you're seeing this you should contact ICDOT admins.<br/>
+    </p>
+    <p>
+      If you are an admin, make sure histomx is indeed listening at that address.
+    </p>
+    {% endif %}
+
+  </div>
+
+</div>
+{% endblock %}
