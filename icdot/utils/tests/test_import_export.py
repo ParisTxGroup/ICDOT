@@ -151,12 +151,14 @@ def test_import_with_multiple_matches(setup_models, review_resource):
 
 def test_import_with_no_matching_reference(setup_models, review_resource):
     dataset = review_resource.export()
-    # Review.objects.all().delete()
-    # # Re-creating the reviews should work.
-    # result = review_resource.import_data(dataset, raise_errors=True, dry_run=False)
+
+    # Re-creating the reviews should work.
+    Review.objects.all().delete()
+    review_resource.import_data(dataset, raise_errors=True, dry_run=False)
+
+    # But now, without books. it should fail.
     Review.objects.all().delete()
     Book.objects.all().delete()
-    # But now, without books. it should fail.
     with pytest.raises(ValidationError):
         review_resource.import_data(dataset, raise_errors=True, dry_run=False)
 

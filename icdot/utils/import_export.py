@@ -8,7 +8,7 @@ class ValidatingModelInstanceLoader(instance_loaders.ModelInstanceLoader):
     """
     Instance loader for Django model.
 
-    Lookup for model instance by ``import_id_fields``.
+    Lookup for model instance by `import_id_fields`.
     """
 
     def _get_params(self, row):
@@ -27,7 +27,7 @@ class ValidatingModelInstanceLoader(instance_loaders.ModelInstanceLoader):
 
         return params
 
-    def _get_instance(self, params):
+    def _get_instance(self, params, raise_on_does_not_exist=False):
         try:
             return self.get_queryset().get(**params)
         except self.resource._meta.model.MultipleObjectsReturned:
@@ -35,15 +35,19 @@ class ValidatingModelInstanceLoader(instance_loaders.ModelInstanceLoader):
                 f"More than one {self.resource._meta.model.__name__} match this row."
             )
         except self.resource._meta.model.DoesNotExist:
+            if not raise_on_does_not_exist:
+                return None
             raise ValidationError(
                 f"No {self.resource._meta.model.__name__} matched this row."
                 f" We searched using {params}."
             )
 
-    def get_instance(self, row):
+    def get_instance(self, row, raise_on_does_not_exist=False):
         """Return a mathing instance or None."""
         params = self._get_params(row)
-        return self._get_instance(params)
+        return self._get_instance(
+            params, raise_on_does_not_exist=raise_on_does_not_exist
+        )
 
 
 class MultiFieldImportField(fields.Field):
@@ -60,7 +64,12 @@ class MultiFieldImportField(fields.Field):
     def clean(self, data, **kwargs):
         resource = self.resource_class()
         instance_loader = resource._meta.instance_loader_class(resource, dataset=None)
-        return resource.get_instance(instance_loader, row=data)
+        if isinstance(resource, ModelResourceWithMultiFieldImport):
+            return resource.get_instance(
+                instance_loader, row=data, raise_on_does_not_exist=True
+            )
+        else:
+            return resource.get_instance(instance_loader, row=data)
 
     def get_id_field(self, field_name):
         resource_field = self.resource_class.fields.get(field_name, None)
@@ -141,9 +150,15 @@ class ModelResourceWithMultiFieldImport(
             return  # Nowhere to get the data from.
         field.save(obj, data, is_m2m, **kwargs)
 
-    def get_instance(self, instance_loader, row):
+    def get_instance(self, instance_loader, row, raise_on_does_not_exist=False):
         import_id_fields = [self.fields[f] for f in self.get_import_id_fields()]
         for field in self._skip_multi_fields(import_id_fields):
             if field.column_name not in row:
                 raise ValueError(f"Missing identifying field {field.column_name}")
-        return instance_loader.get_instance(row)
+
+        if isinstance(instance_loader, ValidatingModelInstanceLoader):
+            return instance_loader.get_instance(
+                row, raise_on_does_not_exist=raise_on_does_not_exist
+            )
+        else:
+            return instance_loader.get_instance(row)
