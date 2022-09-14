@@ -13,26 +13,23 @@
 }
 
 .jumbotron {
-  color: black;
+  color: #01548f;
   background-image: url("../images/landing/banff_bridge.jpg");
   background-size: cover;
   background-position: center;
-
   padding: 2rem 1rem;
   margin-bottom: 2rem;
-  border-radius: .3rem;
+  border-radius: .2rem;
 }
 
 .jumbotron .cloud {
-  background: rgb(255,255,255);
-  background: linear-gradient(
-    160deg,
-    rgba(255,255,255,0.9) 0%,
-    rgba(255,255,255,0.7) 66%,
-    rgba(255,255,255,0) 100%
-  );
-
-  padding: 0.8em;
+  background: rgb(255,255,255,0.4);
+  text-align: center;
+  margin-left: 4rem;
+  margin-right: 4rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  border-radius: .4rem;
 }
 
 .stretched-image {
@@ -46,4 +43,14 @@
 
 .stretched-image-center {
   object-position: center;
+}
+
+.center-object {
+  text-align: center;
+}
+
+.founders {
+  color: #01548f;
+  text-align: center;
+  margin-bottom: 2rem;
 }

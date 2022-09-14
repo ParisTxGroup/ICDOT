@@ -6,28 +6,74 @@
 
 <div class="container">
 
-  <!--
-       <a class="btn btn-primary btn-lg" href="{% url 'admin:index' %}" role=buton>
-       Manage transplant data
-       </a>
-  -->
-
   <div class="jumbotron">
     <div class="cloud">
       <h1 class="display-4">
+        <br>
         International Consortium<br>
         for Diagnostics &amp; Outcomes in Transplantation
       </h1>
+      <br>
+    </div>
 
+    <div class="center-object">
       <p class="lead">
-        <a class="btn btn-primary btn-lg" href="https://icdot.notion.site/ICDOT-437e928e1af54b77b04342ca0b1be043" role="button">Check resources</a>
+        <a class="btn btn-primary btn-lg" href="{% url 'account_login' %}" role="button">&nbsp;Sign in&nbsp;</a>
       </p>
-
     </div>
 
   </div>
 
-  <h2>Founding Members</h2>
+  <hr/>
+
+  <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
+
+    <div class="col px-3">
+
+      <div class="center-object">
+        <i class="mb-3 display-4 text-primary fas fa-microscope m-auto"></i>
+        <h3>Established</h3>
+      </div>
+      <p class="lead">
+        ICDOT was established by the
+        <a href="https://banfffoundation.org">Banff Molecular Pathology working group</a>
+        to develop a secure data repository for the Banff Allograft
+        Pathology Group to contribute and access multidimensional data
+        from organ transplant patients.
+      </p>
+    </div>
+
+    <div class="col px-3">
+      <div class="center-object">
+        <i class="mb-3 display-4 text-primary fas fa-globe m-auto justify-content-center"></i>
+        <h3>Worldwide</h3>
+      </div>
+      <p class="lead">
+        Expression data generated worldwide will be integrated with histological
+        and clinical data to facilitate comprehensive evaluation and mechanistic
+        insights into the diagnosis and assessment of allograft rejection and injury.
+      </p>
+    </div>
+
+    <div class="col px-3">
+      <div class="center-object">
+       <i class="mb-3 display-4 text-primary fas fa-dna m-auto justify-content-center"></i>
+       <h3>Analysis</h3>
+      </div>
+      <p class="lead">
+        In addition to centralizing data, the platform will implement
+        algorithms for analysis and machine learning-based assessment
+        to facilitiate the validation of molecular diagnosis to improve
+        treatment and outcomes in transplant patients.
+      </p>
+    </div>
+  </div>
+
+  <hr/>
+
+  <div class="founders">
+      <h1>Founding Members</h1>
+  </div>
 
   <div class="row">
     <div class="col-lg-3 col-sm-6 col-xs-12 p-1">
@@ -50,45 +96,6 @@
         <img class="img-fluid align-middle" src="{% static 'images/landing/logo_ptg.png' %}">
       </div>
     </div>
-  </div>
-
-  <hr/>
-
-  <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
-
-    <div class="col px-3">
-      <i class="mb-3 display-4 text-primary fas fa-globe m-auto" "=""></i>
-      <h3>Established</h3>
-      <p class="lead">
-        ICDOT was established by the
-        <a href="https://banfffoundation.org">Banff Molecular Pathology working group</a>
-        to develop a secure data repository for the Banff Allograft
-        Pathology Group to contribute and access multidimensional data
-        from organ transplant patients.
-      </p>
-    </div>
-
-    <div class="col px-3">
-      <i class="mb-3 display-4 text-primary fas fa-dna m-auto" "=""></i>
-      <h3>Worldwide</h3>
-      <p class="lead">
-        Expression data generated worldwide will be integrated with histological
-        and clinical data to facilitate comprehensive evaluation and mechanistic
-        insights into the diagnosis and assessment of allograft rejection and injury.
-      </p>
-    </div>
-
-    <div class="col px-3">
-      <i class="mb-3 display-4 text-primary fas fa-microscope m-auto" "=""></i>
-      <h3>Analysis</h3>
-      <p class="lead">
-        In addition to centralizing data, the platform will implement
-        algorithms for analysis and machine learning-based assessment
-        to facilitiate the validation of molecular diagnosis to improve
-        treatment and outcomes in transplant patients.
-      </p>
-    </div>
-
   </div>
 
   <hr/>
