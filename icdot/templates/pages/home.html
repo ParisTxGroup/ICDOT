@@ -1,6 +1,5 @@
 {% extends "base.html" %}
-{% load static %}
-
+{% load static i18n %}
 {% block content %}
 
 
@@ -16,11 +15,13 @@
       <br>
     </div>
 
+    {% if not request.user.is_authenticated %}
     <div class="center-object">
       <p class="lead">
-        <a class="btn btn-primary btn-lg" href="{% url 'account_login' %}" role="button">&nbsp;Sign in&nbsp;</a>
+        <a id="log-in-link" class="btn btn-primary btn-lg" href="{% url 'account_login' %}">{% translate "Sign In" %}</a>
       </p>
     </div>
+    {% endif %}
 
   </div>
 
