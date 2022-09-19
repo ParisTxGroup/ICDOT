@@ -118,7 +118,7 @@ class Transplant(UserScopedModel):
 
     class DonorType(models.TextChoices):
         LIVING = "living donor", _("living donor")
-        DECEASED = "diseased donor", _("diseased donor")
+        DECEASED = "deceased donor", _("deceased donor")
 
     class LivingDonorType(models.TextChoices):
         UNRELATED = "unrelated donor", _("unrelated donor")

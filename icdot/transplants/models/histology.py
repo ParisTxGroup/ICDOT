@@ -662,7 +662,7 @@ class Histology(UserScopedModel):
     )  # choose at least 1; multiple choices allowed
     non_rejection_diagnosis = models.CharField(
         max_length=200,
-        blank=False,
+        blank=True,
         choices=NonRejectionDx.choices,
         verbose_name="non-rejection diagnosis",
     )  # choose at least 1; multiple choices allowed
