@@ -25,7 +25,7 @@ class SequencingData(UserScopedModel, TrackFileUploadModel):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     biopsy = models.ForeignKey(Biopsy, null=True, on_delete=models.SET_NULL)
 
-    run_date = models.DateField()
+    sequencing_date = models.DateField()
     run_protocol = models.CharField(
         blank=True,
         max_length=50,
