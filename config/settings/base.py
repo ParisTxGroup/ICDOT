@@ -67,7 +67,7 @@ DJANGO_APPS = [
 ADMIN_APPS = [
     "admin_interface",
     "colorfield",
-    "django.contrib.admin",
+    "icdot.apps.CustomAdminConfig",
 ]
 THIRD_PARTY_APPS = [
     "crispy_forms",
