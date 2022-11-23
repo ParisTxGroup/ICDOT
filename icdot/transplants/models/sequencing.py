@@ -55,12 +55,12 @@ class SequencingData(UserScopedModel, TrackFileUploadModel):
     file_ref = models.CharField(
         max_length=256,
         blank=True,
-        help_text=( # FIXME:
+        help_text=(  # FIXME:
             "<b>This is the name that will be stored in the database for your RCC file.</b><br/>"
             "This reference will be matched against files that are uploaded as batches.<br/>"
             "You can also upload a file directly and it will be associated to this reference."
         ),
-        verbose_name="file name"  # FIXME: This should be the actual name, including in excel.
+        verbose_name="file name",  # FIXME: This should be the actual name, including in excel.
     )
     file_path = models.FileField(
         null=True,

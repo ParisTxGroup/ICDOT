@@ -4,7 +4,6 @@ import requests
 from django.conf import settings
 from django.db import models
 from django.utils.translation import gettext_lazy as _
-
 from django_jsonform.models.fields import JSONField
 
 
@@ -76,7 +75,6 @@ class HistomxReportRequest(models.Model):
         style = "pdf" if self.render_pdf else "html"
 
         url = urljoin(settings.HISTOMX_SERVICE_URL, f"histomx_report/{style}")
-
         response = requests.post(
             url,
             json=dict(

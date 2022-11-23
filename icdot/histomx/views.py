@@ -20,7 +20,6 @@ class HistomxReportRequestFormView(PermissionRequiredMixin, CreateView):
 
         # This model should not be saved to the database,
         # because we don't need to remember it and because it is not managed.
-
         histomx_report_request = form.save(commit=False)
 
         try:

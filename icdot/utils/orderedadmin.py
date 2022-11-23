@@ -17,11 +17,11 @@ class OrderedAdminSite(django.contrib.admin.AdminSite):
         app_list = app_dict.values()
 
         # Sort the apps alphabetically.
-        app_list = sorted(app_list, key=lambda x: x['name'].lower())
+        app_list = sorted(app_list, key=lambda x: x["name"].lower())
 
         # Sort the models alphabetically within each app.
         if self.models_should_be_sorted:
             for app in app_list:
-                app['models'].sort(key=lambda x: x['name'])
+                app["models"].sort(key=lambda x: x["name"])
 
         return app_list

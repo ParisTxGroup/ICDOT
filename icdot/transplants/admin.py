@@ -6,6 +6,7 @@ from nonrelated_inlines.admin import NonrelatedStackedInline
 
 from icdot.transplants import fieldsets, forms, models, resources
 
+
 @admin.register(models.Transplant)
 class TransplantAdmin(ImportExportModelAdmin):
     resource_class = resources.TransplantResource

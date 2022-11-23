@@ -6,13 +6,15 @@ import typing
 from enum import Enum
 from pathlib import Path
 
-# TODO: import base64
-
 from fastapi import FastAPI, HTTPException
 from fastapi.responses import HTMLResponse, Response
 from pydantic import BaseModel, BaseSettings
 
+# TODO: import base64  # for rcc_file encoding.
+
+
 app = FastAPI()
+
 
 class Settings(BaseSettings):
     class Config:
@@ -36,7 +38,6 @@ class ReportParameters(HashableBaseModel):
     template: Templates
     rna_metadata: dict[str, typing.Any]
     patient_metadata: dict[str, typing.Any]
-
 
 
 @functools.lru_cache(maxsize=32)
