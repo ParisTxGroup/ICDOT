@@ -13,7 +13,7 @@ class HistomxReportRequestFormView(PermissionRequiredMixin, CreateView):
     permission_required = "histomx.add_histomxreportrequest"
     template_name = "histomx/request_histomx_report.html"
     model = HistomxReportRequest
-    fields = ["RCC_file", "render_pdf"]
+    fields = ["RCC_file", "render_pdf", "template", "rna_metadata", "patient_metadata"]
 
     def form_valid(self, form):
         """Overwrite default database behavior and render the result."""

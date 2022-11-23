@@ -16,7 +16,15 @@ required_packages <- c(
     "predtools",
     "reshape2",
     "rmarkdown",
-    "smotefamily"
+
+    # New packages that haven't been added to pre-builts yet.
+    "smotefamily",
+    "ggpubr",
+    "C50",
+    "gbm",
+    "xgboost",
+    "DescTools"
+
 )
 
 installed_packages <- as.data.frame(installed.packages())$Package

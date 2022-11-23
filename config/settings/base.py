@@ -78,6 +78,7 @@ THIRD_PARTY_APPS = [
     "import_export",
     "django_markwhat",
     "loginas",
+    "django_jsonform",
 ]
 LOCAL_APPS = [
     "icdot.users",

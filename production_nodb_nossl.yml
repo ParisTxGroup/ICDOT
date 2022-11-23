@@ -29,7 +29,7 @@ services:
     image: ghcr.io/paristxgroup/icdot_production_histomx
     container_name: histomx
     environment:
-      - HISTOMX_RMD_PATH=/histomx/scripts/histomx_kidney.Rmd
+      - 'HISTOMX_TEMPLATES={"DEFAULT": "/histomx/scripts/histomx_kidney.Rmd"}'
     volumes:
       # Sadly rmarkdown must have rw access to be able to knit.
       # As long as we're running only trusted code that's fine.
