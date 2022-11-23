@@ -32,7 +32,7 @@ and the related transplant.
 ## How file uploads work
 
 
-`SequencingData` can include an atoutached file (RCC data). When
+`SequencingData` can include an attached file (RCC data). When
 importing data from `xlsx` files or `json` you can not directly upload
 the associated files. Instead what you can do is:
 

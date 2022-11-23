@@ -1,45 +1,81 @@
 import functools
-import os
+import json
 import subprocess
 import tempfile
+import typing
+from enum import Enum
 from pathlib import Path
 
-from fastapi import FastAPI, File, HTTPException
+# TODO: import base64
+
+from fastapi import FastAPI, HTTPException
 from fastapi.responses import HTMLResponse, Response
+from pydantic import BaseModel, BaseSettings
 
 app = FastAPI()
 
+class Settings(BaseSettings):
+    class Config:
+        env_prefix = "HISTOMX_"
+
+    templates: dict[str, str]
+
+
+settings = Settings()
+
+Templates = Enum("Templates", {k: k for k in settings.templates})
+
+
+class HashableBaseModel(BaseModel):
+    def __hash__(self):
+        return hash((type(self), self.json()))
+
+
+class ReportParameters(HashableBaseModel):
+    rccdata: bytes
+    template: Templates
+    rna_metadata: dict[str, typing.Any]
+    patient_metadata: dict[str, typing.Any]
+
+
 
 @functools.lru_cache(maxsize=32)
-def get_histomx_html(rccdata: bytes):
+def get_histomx_html(params: ReportParameters):
 
-    rmdfilepath = os.getenv("HISTOMX_RMD_PATH")
+    rmdfilepath = settings.templates[params.template.value]
 
     with tempfile.TemporaryDirectory() as tmpdir:
         tmpdirpath = Path(tmpdir)
 
-        rccfilepath = tmpdirpath / "input_file.rcc"
         htmloutpath = tmpdirpath / "output_file.html"
+        rccfilepath = tmpdirpath / "input_file.rcc"
+        rnajsonpath = tmpdirpath / "rna_file.json"
+        patientjsonpath = tmpdirpath / "patient_file.json"
 
         with rccfilepath.open(mode="wb") as rccfile:
-            rccfile.write(rccdata)
+            rccfile.write(params.rccdata)
+
+        for jsonpath, jsondata in [
+            (rnajsonpath, params.rna_metadata),
+            (patientjsonpath, params.patient_metadata),
+        ]:
+            with jsonpath.open(mode="w") as jsonfile:
+                json.dump(jsondata, jsonfile)
 
         p = subprocess.run(
             [
                 "R",
                 "-e",
-                """
+                f"""
         rmarkdown::render("{rmdfilepath}",
-            output_file="{outfilepath}",
+            output_file="{htmloutpath}",
             params=list(
-                rcc_file='{rccfilepath}'
+                rcc_file="{rccfilepath}",
+                rna_file="{rnajsonpath}",
+                patient_file="{patientjsonpath}"
             )
         )
-        """.format(
-                    rmdfilepath=rmdfilepath,
-                    outfilepath=htmloutpath,
-                    rccfilepath=rccfilepath,
-                ),
+        """,
             ]
         )
 
@@ -55,16 +91,15 @@ def get_histomx_html(rccdata: bytes):
 
 @app.post("/histomx_report/html")
 @functools.lru_cache(maxsize=32)
-def generate_histomx_html_report(rccdata: bytes = File(...)):
-    html = get_histomx_html(rccdata)
+def generate_histomx_html_report(params: ReportParameters):
+    html = get_histomx_html(params)
     return HTMLResponse(content=html)
 
 
 @app.post("/histomx_report/pdf")
 @functools.lru_cache(maxsize=32)
-def generate_histomx_pdf_report(rccdata: bytes = File(...)):
-
-    html = get_histomx_html(rccdata)
+def generate_histomx_pdf_report(params: ReportParameters):
+    html = get_histomx_html(params)
 
     with tempfile.TemporaryDirectory() as tmpdir:
         tmpdirpath = Path(tmpdir)

@@ -13,6 +13,7 @@
 
   <form method="post" id="form" enctype='multipart/form-data'>
     {% csrf_token %}
+    {{ form.media }}
     {{ form | crispy }}
     <button type="submit" id="submitBtn" class="btn btn-primary">
       <span id="btnText" class="d-inline">
