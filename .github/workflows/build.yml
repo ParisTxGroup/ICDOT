@@ -1,0 +1,40 @@
+name: Build and push image
+
+env:
+  REGISTRY: ghcr.io
+  DJANGO_NAME: paristxgroup/icdot_production_django
+  HISTOMX_NAME: paristxgroup/icdot_production_histomx
+
+on:
+  push:
+    branches: [ "main" ]
+    paths-ignore: [ "docs/**" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v3
+      - uses: docker/login-action@v2
+        name: Login to repository
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - uses: docker/build-push-action@v3
+        name: Build and push django
+        with:
+          push: true
+          tags: ${{ env.REGISTRY }}/${{ env.DJANGO_NAME }}:latest,${{ env.REGISTRY }}/${{ env.DJANGO_NAME }}:${{ github.sha }}
+          context: .
+          file: ./compose/production/django/Dockerfile
+      - uses: docker/build-push-action@v3
+        name: Build and push histomx
+        with:
+          push: true
+          tags: ${{ env.REGISTRY }}/${{ env.HISTOMX_NAME }}:latest,${{ env.REGISTRY }}/${{ HISTOMX_NAME }}:${{ github.sha }}
+          context: .
+          file: ./compose/local/histomx/Dockerfile
