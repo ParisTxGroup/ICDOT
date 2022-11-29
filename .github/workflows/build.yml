@@ -35,6 +35,6 @@ jobs:
         name: Build and push histomx
         with:
           push: true
-          tags: ${{ env.REGISTRY }}/${{ env.HISTOMX_NAME }}:latest,${{ env.REGISTRY }}/${{ HISTOMX_NAME }}:${{ github.sha }}
+          tags: ${{ env.REGISTRY }}/${{ env.HISTOMX_NAME }}:latest,${{ env.REGISTRY }}/${{ env.HISTOMX_NAME }}:${{ github.sha }}
           context: .
           file: ./compose/local/histomx/Dockerfile
