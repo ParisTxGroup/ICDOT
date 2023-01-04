@@ -7,7 +7,7 @@ env:
 on:
   push:
     branches: [ "main" ]
-    paths-ignore: [ "docs/**", "histomx/**", "compose/production/histomx/**", "compose/local/**" ]
+    paths-ignore: [ "docs/**", "histomx/**", "compose/production/histomx/**", "compose/local/docs/**", "compose/local/histomx/**" ]
 
 jobs:
   build:

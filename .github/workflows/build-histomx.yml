@@ -7,7 +7,7 @@ env:
 on:
   push:
     branches: [ "main" ]
-    paths: [ "histomx/**", "compose/production/histomx/**" ]
+    paths: [ "histomx/**", "compose/production/histomx/**", "compose/local/histomx/**" ]
 
 jobs:
   build:
