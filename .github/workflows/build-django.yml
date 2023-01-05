@@ -2,13 +2,12 @@ name: Build and push image
 
 env:
   REGISTRY: ghcr.io
-  DJANGO_NAME: paristxgroup/icdot_production_django
-  HISTOMX_NAME: paristxgroup/icdot_production_histomx
+  CONTAINER_NAME: paristxgroup/icdot_production_django
 
 on:
   push:
     branches: [ "main" ]
-    paths-ignore: [ "docs/**" ]
+    paths-ignore: [ "docs/**", "histomx/**", "compose/production/histomx/**", "compose/local/docs/**", "compose/local/histomx/**" ]
 
 jobs:
   build:
@@ -18,6 +17,8 @@ jobs:
       packages: write
     steps:
       - uses: actions/checkout@v3
+      - uses: satackey/action-docker-layer-caching@v0.0.11
+        continue-on-error: true
       - uses: docker/login-action@v2
         name: Login to repository
         with:
@@ -28,13 +29,6 @@ jobs:
         name: Build and push django
         with:
           push: true
-          tags: ${{ env.REGISTRY }}/${{ env.DJANGO_NAME }}:latest,${{ env.REGISTRY }}/${{ env.DJANGO_NAME }}:${{ github.sha }}
+          tags: ${{ env.REGISTRY }}/${{ env.CONTAINER_NAME }}:latest,${{ env.REGISTRY }}/${{ env.CONTAINER_NAME }}:${{ github.sha }}
           context: .
           file: ./compose/production/django/Dockerfile
-      - uses: docker/build-push-action@v3
-        name: Build and push histomx
-        with:
-          push: true
-          tags: ${{ env.REGISTRY }}/${{ env.HISTOMX_NAME }}:latest,${{ env.REGISTRY }}/${{ env.HISTOMX_NAME }}:${{ github.sha }}
-          context: .
-          file: ./compose/local/histomx/Dockerfile
