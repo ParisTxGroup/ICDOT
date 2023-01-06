@@ -21,6 +21,7 @@ services:
       - 0.0.0.0:80:5000
     extra_hosts:
       - postgres:host-gateway
+    restart: always
 
   histomx:
     build:
@@ -34,6 +35,8 @@ services:
       # Sadly rmarkdown must have rw access to be able to knit.
       # As long as we're running only trusted code that's fine.
       - /fs1/app/histomx:/histomx:rw
+    restart: always
 
   redis:
     image: redis:6
+    restart: always

@@ -19,6 +19,7 @@ services:
       - ./.envs/.production/.django
       - ./.envs/.production/.postgres
     command: /start
+    restart: always
 
   histomx:
     build:
@@ -26,6 +27,7 @@ services:
       dockerfile: ./compose/local/histomx/Dockerfile
     image: icdot_production_histomx
     container_name: histomx
+    restart: always
 
   postgres:
     build:
@@ -37,6 +39,7 @@ services:
       - production_postgres_data_backups:/backups:z
     env_file:
       - ./.envs/.production/.postgres
+    restart: always
 
   traefik:
     build:
@@ -50,6 +53,8 @@ services:
     ports:
       - "0.0.0.0:80:80"
       - "0.0.0.0:443:443"
+    restart: always
 
   redis:
     image: redis:6
+    restart: always
