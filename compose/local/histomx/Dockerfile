@@ -11,6 +11,7 @@ RUN apt-get update && apt-get install -y \
 
 WORKDIR /root/
 
+
 COPY ./histomx/r-prebuilt-packages.txt ./
 RUN xargs -a ./r-prebuilt-packages.txt apt-get install -y
 
@@ -22,7 +23,7 @@ RUN Rscript r-packages-install.R
 RUN apt-get update && apt-get install -y python3 python3-pip
 
 COPY ./requirements/histomx.txt ./requirements.txt
-RUN pip3 install --no-cache-dir --upgrade -r requirements.txt
+RUN pip3 install --break-system-packages --no-cache-dir --upgrade -r requirements.txt
 
 # Copy the python code for the server.
 COPY ./histomx ./histomx
