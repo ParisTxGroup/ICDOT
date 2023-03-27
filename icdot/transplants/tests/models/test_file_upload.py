@@ -95,7 +95,6 @@ def test_model_ref_ambigous(user):
 
 def test_multiple_refs(user):
     class TrackingMultipleFiles(UserScopedModel, TrackFileUploadModel):
-
         ref_one = models.CharField(max_length=256, blank=True)
         ref_two = models.CharField(max_length=256, blank=True)
         path_one = models.FileField(null=True, editable=False)

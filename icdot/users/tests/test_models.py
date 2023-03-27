@@ -16,7 +16,6 @@ def test_user_get_absolute_url(user: User):
 
 
 def test_user_recording_model_updates_created_and_modified():
-
     user1, user2 = UserFactory(), UserFactory()
 
     class TestUserRecordingModel(UserRecordingModel):
@@ -42,7 +41,6 @@ def test_user_recording_model_updates_created_and_modified():
 
 
 def test_user_scoped_model_limits_queries():
-
     user1, user2 = UserFactory(), UserFactory()
 
     class TestUserScopedModel(UserScopedModel):
@@ -76,7 +74,6 @@ def test_user_scoped_model_limits_queries():
 
 
 def test_user_scoped_model_work_with_resources():
-
     user1, user2 = UserFactory(), UserFactory()
 
     class TestModel(UserScopedModel):

@@ -2,7 +2,6 @@ import django.contrib
 
 
 class OrderedAdminSite(django.contrib.admin.AdminSite):
-
     models_should_be_sorted = True
 
     def __init__(self, *args, sort_apps=True, sort_models=True, **kwargs):

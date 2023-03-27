@@ -164,7 +164,6 @@ def test_import_with_no_matching_reference(setup_models, review_resource):
 
 
 def test_prefix():
-
     field = MultiFieldImportField(Author)
     assert field.attribute_prefix == ""
 

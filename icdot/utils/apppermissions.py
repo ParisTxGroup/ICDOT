@@ -2,7 +2,6 @@ from django.db.models.signals import post_migrate
 
 
 def ensure_group_creation(app_config):
-
     # It is important this callback is different each
     # time we connect it to a signal below.
     def make_group_for_app(sender, **kwargs):

@@ -16,7 +16,6 @@ def test_setting_user():
 
 
 def test_context_manager():
-
     threadlocal.set_current_user("previous")
     previous = threadlocal.get_current_user()
     new = "foo"
@@ -29,7 +28,6 @@ def test_context_manager():
 
 
 def test_context_manager_handling_exception():
-
     threadlocal.set_current_user("previous")
     previous = threadlocal.get_current_user()
     new = "foo"

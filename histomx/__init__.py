@@ -42,7 +42,6 @@ class ReportParameters(HashableBaseModel):
 
 @functools.lru_cache(maxsize=32)
 def get_histomx_html(params: ReportParameters):
-
     rmdfilepath = settings.templates[params.template.value]
 
     with tempfile.TemporaryDirectory() as tmpdir:

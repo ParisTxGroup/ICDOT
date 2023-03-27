@@ -27,7 +27,6 @@ class FileUploadBatch(UserScopedModel):
 
 
 class FileUpload(UserScopedModel):
-
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
 
     file_ref = models.CharField(max_length=256)

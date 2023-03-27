@@ -39,7 +39,6 @@ def _build_json_for_schema(schema):
 
 
 def test_histomx_request(requests_mock, user: User, rf: RequestFactory):
-
     permission = Permission.objects.get(codename="add_histomxreportrequest")
     user.user_permissions.add(permission)
 
@@ -83,7 +82,6 @@ def test_histomx_request(requests_mock, user: User, rf: RequestFactory):
 
 
 def test_histomx_request_exception(requests_mock, user: User, rf: RequestFactory):
-
     permission = Permission.objects.get(codename="add_histomxreportrequest")
     user.user_permissions.add(permission)
 
@@ -119,7 +117,6 @@ def test_histomx_request_exception(requests_mock, user: User, rf: RequestFactory
 
 
 def test_histomx_request_permission(requests_mock, user: User, rf: RequestFactory):
-
     request = rf.get("/histomx/")
     request.user = user
 

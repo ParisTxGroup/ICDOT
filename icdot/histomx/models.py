@@ -8,7 +8,6 @@ from django_jsonform.models.fields import JSONField
 
 
 class HistomxReportRequest(models.Model):
-
     PROBABLY_NOT_AVAILABLE = settings.HISTOMX_SERVICE_URL is None
 
     class Meta:
@@ -71,7 +70,6 @@ class HistomxReportRequest(models.Model):
     )
 
     def get_report(self):
-
         style = "pdf" if self.render_pdf else "html"
 
         url = urljoin(settings.HISTOMX_SERVICE_URL, f"histomx_report/{style}")

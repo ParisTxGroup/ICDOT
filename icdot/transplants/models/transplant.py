@@ -8,7 +8,6 @@ from icdot.users.models import UserScopedModel
 
 
 class Transplant(UserScopedModel):
-
     # WARNING: We use views/forms with fields='__all__'.
     # Please make sure when adding fields here that it is okay for users to both
     # see and edit them without it being a security problem for the app!

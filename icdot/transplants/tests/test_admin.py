@@ -9,7 +9,6 @@ pytestmark = pytest.mark.django_db
 
 
 def test_save_related(admin_client):
-
     with django_scopes.scopes_disabled():
         FileUpload.objects.all().delete()
         FileUploadBatch.objects.all().delete()
