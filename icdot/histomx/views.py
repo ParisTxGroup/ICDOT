@@ -1,3 +1,6 @@
+import time
+from datetime import datetime
+
 import requests
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.http import HttpResponse
@@ -51,3 +54,11 @@ if HistomxReportRequest.PROBABLY_NOT_AVAILABLE:
     )
 else:
     histomx_report_request_view = HistomxReportRequestFormView.as_view()
+
+
+def histomx_timeout_view(request, timeout):
+    start = datetime.now()
+    time.sleep(min(timeout, 300))
+    stop = datetime.now()
+    html = f"<html><body>{start} : started<br/>{stop} : finished</body></html>"
+    return HttpResponse(html)
