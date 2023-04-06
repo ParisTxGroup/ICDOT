@@ -302,3 +302,18 @@ import django.forms  # noqa E402
 django.forms.DateInput.input_type = "date"
 django.forms.DateTimeInput.input_type = "datetime"
 django.forms.TimeInput.input_type = "time"
+
+DATE_INPUT_FORMATS = [
+    "%Y-%m-%d",  # '2006-10-25'
+    "%d/%m/%Y",  # '25/10/2006'
+    # Do not allow MDY as that leads to confusion.
+    # '%m/%d/%y',  # '10/25/06'
+    "%b %d %Y",  # 'Oct 25 2006'
+    "%b %d, %Y",  # 'Oct 25, 2006'
+    "%d %b %Y",  # '25 Oct 2006'
+    "%d %b, %Y",  # '25 Oct, 2006'
+    "%B %d %Y",  # 'October 25 2006'
+    "%B %d, %Y",  # 'October 25, 2006'
+    "%d %B %Y",  # '25 October 2006'
+    "%d %B, %Y",  # '25 October, 2006'
+]

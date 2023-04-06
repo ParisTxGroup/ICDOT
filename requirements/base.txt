@@ -19,8 +19,8 @@ crispy-bootstrap5==0.7  # https://github.com/django-crispy-forms/crispy-bootstra
 django-redis==5.2.0  # https://github.com/jazzband/django-redis
 django-scopes==1.2.0.post1  # https://github.com/raphaelm/django-scopes
 django-tables2==2.4.1  # https://github.com/jieter/django-tables2
-django-import-export==2.7.0  # https://github.com/django-import-export/django-import-export
-django-admin-interface==0.19.0  # https://github.com/fabiocaccamo/django-admin-interface
+django-import-export==3.1.0  # https://github.com/django-import-export/django-import-export
+django-admin-interface==0.24.2  # https://github.com/fabiocaccamo/django-admin-interface
 django-markwhat==1.6.2  # https://github.com/Alir3z4/django-markwhat
 django-loginas==0.3.10  # https://github.com/skorokithakis/django-loginas
 django-nonrelated-inlines==0.1.1  # https://github.com/bhomnick/django-nonrelated-inlines

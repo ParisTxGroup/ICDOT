@@ -3,3 +3,7 @@
 USE_DOCKER=yes
 IPYTHONDIR=/app/.ipython
 HISTOMX_SERVICE_URL=http://histomx/
+
+# Debug
+# ------------------------------------------------------------------------------
+PYTHONBREAKPOINT=ipdb.set_trace
