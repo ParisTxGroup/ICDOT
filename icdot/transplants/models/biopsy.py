@@ -41,17 +41,18 @@ class Biopsy(UserScopedModel):
         G_G = "g/g", _("g/g")
 
     class Immunosuppressants(models.TextChoices):
-        ABATACEPT = "Abatacept", _("Abatacept")
-        AZATHIOPRINE = "Azathioprine", _("Azathioprine")
-        BELATACEPT = "Belatacept", _("Belatacept")
-        CYCLOSPORINE = "Cyclosporine", _("Cyclosporine")
-        EVEROLIMUS = "Everolimus", _("Everolimus")
-        MMF = "MMF", _("MMF")
-        MPA = "MPA", _("MPA")
-        PREDNISONE = "Prednisone", _("Prednisone")
-        SIROLIMUS = "Sirolimus", _("Sirolimus")
-        TACROLIMUS = "Tacrolimus", _("Tacrolimus")
-        # other:specify
+        ABATACEPT = "abatacept", _("abatacept")
+        AZATHIOPRINE = "azathioprine", _("azathioprine")
+        BELATACEPT = "belatacept", _("belatacept")
+        CYCLOSPORINE = "cyclosporine", _("cyclosporine")
+        EVEROLIMUS = "everolimus", _("everolimus")
+        IDES = "IDeS", _("imlifidase (IDeS)")
+        MMF = "MMF", _("mycophenolate mofetil (MMF)")
+        MPA = "MPA", _("mycophenolic acid (MPA)")
+        PREDNISONE = "prednisone", _("prednisone")
+        SIROLIMUS = "sirolimus", _("sirolimus")
+        TACROLIMUS = "tacrolimus", _("tacrolimus")
+        OTHER = "other", _("other")
 
     class ImmunosuppressantDoseUnits(models.TextChoices):
         MG_DAY = "mg/day", _("mg/day")
@@ -61,20 +62,18 @@ class Biopsy(UserScopedModel):
         # other:free text
 
     class BxRejectionTreatment(models.TextChoices):
-        ALEMTUZUMAB = "Alemtuzumab", _("Alemtuzumab")
-        BORTEZOMIB = "Bortezomib", _("Bortezomib")
-        ATG = "Anti-thymocyte globulin", _("Anti-thymocyte globulin")
-        ECULIZIMAB = "Eculizimab", _("Eculizimab")
-        IVIG = "IVIG", _("IVIG")
-        PLASMAPHARESIS = "Plasmapharesis", _("Plasmapharesis")
-        RITUXIMAB = "Rituximab", _("Rituximab")
+        ALEMTUZUMAB = "alemtuzumab", _("alemtuzumab")
+        BORTEZOMIB = "bortezomib", _("bortezomib")
+        ATG = "ATG", _("anti-thymocyte globulin (ATG)")
+        ECULIZUMAB = "eculizumab", _("eculizumab")
+        IVIG = "IVIG", _("intravenous immunoglobulin (IVIG)")
+        PLASMAPHARESIS = "plasmapharesis", _("plasmapharesis")
+        RITUXIMAB = "rituximab", _("rituximab")
 
     class BxRejectionTreatmentResponse(models.TextChoices):
-        COMPLETE = "Complete response", _(
-            "Complete response (Cr within 10% of baseline)"
-        )
-        PARTIAL = "Partial response", _("Partial response (Cr 10-50% over baseline) ")
-        NONE = "No response", _("No response (Cr >50% increase over baseline)")
+        COMPLETE = "complete", _("Complete response (Cr within 10% of baseline)")
+        PARTIAL = "partial", _("Partial response (Cr 10-50% over baseline) ")
+        NONE = "none", _("no response (Cr >50% increase over baseline)")
 
     class iDSAclass(models.TextChoices):
         CLASS_I = "I", _("I")
@@ -97,7 +96,7 @@ class Biopsy(UserScopedModel):
         COLLAGEN = "collagen", _("collagen")
         KA1 = "K-a-1", _("K-a-1")
         TUBULIN = "tubulin", _("tubulin")
-        # other:specify
+        OTHER = "other", _("other")
 
     class GraftFailureCause(models.TextChoices):
         DEATH = "death", _("death")
@@ -163,7 +162,7 @@ class Biopsy(UserScopedModel):
         validators=[MinValueValidator(0.0), MaxValueValidator(30.0)],
         blank=True,
         null=True,
-        verbose_name="Protein/creatinine ratio",
+        verbose_name="protein/creatinine ratio",
     )
     prot_creat_ratio_units = models.CharField(
         max_length=50,
@@ -185,7 +184,7 @@ class Biopsy(UserScopedModel):
         max_length=100,
         blank=True,
         choices=Immunosuppressants.choices,
-        verbose_name="Immunosuppresants",
+        verbose_name="immunosuppresants",
     )
     immunosuppressant_dose = models.FloatField(
         blank=True,
@@ -195,12 +194,12 @@ class Biopsy(UserScopedModel):
         max_length=100,
         blank=True,
         choices=ImmunosuppressantDoseUnits.choices,
-        verbose_name="Immunosuppresant dose units",
+        verbose_name="immunosuppresant dose units",
     )  # link immunosuppressant to dose (+ sign to add med + dose)
     immunosuppressant_trough = models.FloatField(
         blank=True,
         null=True,
-        verbose_name="Immunosuppressant trough level:C0 (ng/mL)",
+        verbose_name="immunosuppressant trough level:C0 (ng/mL)",
     )
     immunosuppressant_postdose = models.FloatField(
         blank=True,
@@ -221,7 +220,7 @@ class Biopsy(UserScopedModel):
         max_length=100,
         choices=BxRejectionTreatmentResponse.choices,
         blank=True,
-        verbose_name="Rejection treatment response",
+        verbose_name="rejection treatment response",
     )
     rejection_date = models.DateField(
         blank=True,
@@ -232,7 +231,7 @@ class Biopsy(UserScopedModel):
         validators=[MinValueValidator(0.0), MaxValueValidator(100.0)],
         blank=True,
         null=True,
-        verbose_name="Donor-derived cf-DNA (%)",
+        verbose_name="donor-derived cf-DNA (%)",
     )
     bkv_load = models.IntegerField(
         blank=True,

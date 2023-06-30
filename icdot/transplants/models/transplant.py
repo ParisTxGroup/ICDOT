@@ -13,19 +13,19 @@ class Transplant(UserScopedModel):
     # see and edit them without it being a security problem for the app!
 
     class Sex(models.TextChoices):
-        MALE = "M", _("Male")
-        FEMALE = "F", _("Female")
-        OTHER = "O", _("Other")
+        MALE = "male", _("male")
+        FEMALE = "female", _("female")
+        OTHER = "other", _("other")
 
     class WeightUnits(models.TextChoices):
-        KG = "kilograms", _("kilograms (kg)")
-        POUNDS = "pounds", _("pounds (lb)")
+        KG = "kg", _("kilograms (kg)")
+        POUNDS = "lbs", _("pounds (lb)")
 
     class HeightUnits(models.TextChoices):
-        CM = "centimeters", _("centimeters (cm)")
-        METERS = "meters", _("meters (m)")
-        IN = "inches", _("inches (in)")
-        FEET = "feet", _("feet (ft)")
+        CM = "cm", _("centimeters (cm)")
+        METERS = "m", _("meters (m)")
+        IN = "in", _("inches (in)")
+        FEET = "ft", _("feet (ft)")
 
     class Ethnicity(models.TextChoices):
         AMERINDIAN = "American Indian or Alaska Native", _(
@@ -76,35 +76,25 @@ class Transplant(UserScopedModel):
 
     class PrimaryDisease(models.TextChoices):
         AMYLOIDOSIS = "amyloidosis", _("amyloidosis")
-        ANCA = "anti-neutrophil cytoplasmic autoantibody (ANCA) vasculitis", _(
+        ANCA = "ANCA vasculitis", _(
             "anti-neutrophil cytoplasmic autoantibody (ANCA) vasculitis"
         )
-        CAKUT = "congenital abnormality of the kidney or urinary tract (CAKUT)", _(
-            "congenital abnormality of the kidney or urinary tract (CAKUT)"
-        )
-        CPN = "chronic progressive nephropathy (CPN)", _(
-            "chronic progressive nephropathy (CPN)"
-        )
+        CAKUT = "CAKUT", _("congenital abnormality of the kidney or urinary tract (CAKUT)")
+        CPN = "CPN", _("chronic progressive nephropathy (CPN)")
         C3_GLOMERULOPATHY = "complement 3 glomerulopathy", _(
             "complement 3 glomerulopathy"
         )
         DIABETES = "diabetes mellitus", _("diabetes mellitus")
         DIABETIC_NEPHROPATHY = "diabetic nephropathy", _("diabetic nephropathy")
-        FSGS = "focal segmental glomerulosclerosis (FSGS)", _(
-            "focal segmental glomerulosclerosis (FSGS)"
-        )
+        FSGS = "FSGS", _("focal segmental glomerulosclerosis (FSGS)")
         GLOMERULAR_NEPHROPATHY = "glomerular nephropathy", _("glomerular nephropathy")
         HKD = "hypertensive kidney disease", _("hypertensive kidney disease")
         IGA_NEPHROPATHY = "IgA nephropathy", _("IgA nephropathy")
         PYELO = "interstitial nephropathy/pyelonephritis", _(
             "interstitial nephropathy/pyelonephritis"
         )
-        MPGN = "Membranoproliferative glomerulonephritis (MPGN)", _(
-            "Membranoproliferative glomerulonephritis (MPGN)"
-        )
-        MIDD = "Monoclonal immunoglobulin (Ig) deposition disease (MIDD)", _(
-            "Monoclonal immunoglobulin (Ig) deposition disease (MIDD)"
-        )
+        MPGN = "MPGN", _("Membranoproliferative glomerulonephritis (MPGN)")
+        MIDD = "MIDD", _("Monoclonal immunoglobulin (Ig) deposition disease (MIDD)")
         VASCULAR_NEPHROPATHY = "vascular nephropathy", _("vascular nephropathy")
         ALPORT = "alport syndrome", _("alport syndrome")
         FABRY = "fabry disease", _("fabry disease")
@@ -112,25 +102,21 @@ class Transplant(UserScopedModel):
         CONGENITAL = "congenital nephropathy", _("congenital nephropathy")
 
     class DonorCriteria(models.TextChoices):
-        SCD = "SCD", _("Standard Donor Criteria")
-        ECD = "ECD", _("Expanded Donor Criteria")
+        SCD = "SCD", _("Standard Donor Criteria (SCD)")
+        ECD = "ECD", _("Expanded Donor Criteria (ECD)")
 
     class DonorType(models.TextChoices):
         LIVING = "living donor", _("living donor")
         DECEASED = "deceased donor", _("deceased donor")
 
     class LivingDonorType(models.TextChoices):
-        UNRELATED = "unrelated donor", _("unrelated donor")
-        RELATED_HLA_IDENTICAL = "related HLA identical donor", _(
-            "related HLA identical donor"
-        )
-        RELATED_HLA_NON_IDENTICAL = "related non-HLA identical donor", _(
-            "related non-HLA identical donor"
-        )
+        UNRELATED = "unrelated", _("unrelated donor")
+        RELATED_HLA_IDENTICAL = "related HLA identical", _("related HLA identical donor")
+        RELATED_HLA_NON_IDENTICAL = "related non-HLA identical", _("related non-HLA identical donor")
 
     class DeceasedDonorType(models.TextChoices):
-        DBD = "donation after brain death", _("donation after brain death")
-        DCD = "donation after circulatory death", _("donation after circulatory death")
+        DBD = "DBD", _("donation after brain death (DBD)")
+        DCD = "DCD", _("donation after circulatory death (DCD)")
 
     class CauseDeath(models.TextChoices):
         ANOXIA = "anoxia", _("anoxia")
@@ -146,7 +132,7 @@ class Transplant(UserScopedModel):
         YEARS = "years", _("years")
 
     class InductionTherapy(models.TextChoices):
-        ATG = "thymoglbulin", _("thymoglbulin")
+        ATG = "ATG", _("thymoglbulin (ATG)")
         BASILIXIMAB = "basiliximab", _("basiliximab")
         NONE = "none", _("none")
 
@@ -187,6 +173,11 @@ class Transplant(UserScopedModel):
     recipient_dob = models.DateField(
         blank=True,
         null=True,
+    )
+    recipient_age = models.IntegerField(
+        blank=True,
+        null=True,
+        verbose_name="recipient age (years)",
     )
     recipient_height = models.FloatField(
         blank=True,
@@ -394,6 +385,26 @@ class Transplant(UserScopedModel):
         default=CreatinemiaUnits.UMOL_L,
         choices=CreatinemiaUnits.choices,
     )
+    donor_cmv_status = models.BooleanField(
+        blank=True,
+        null=True,
+        verbose_name="cytomegalovirus status",
+    )
+    donor_ebv_status = models.BooleanField(
+        blank=True,
+        null=True,
+        verbose_name="Epstein-Barr virus status",
+    )
+    donor_hcv_status = models.BooleanField(
+        blank=True,
+        null=True,
+        verbose_name="hepatitus C status",
+    )
+    donor_hiv_status = models.BooleanField(
+        blank=True,
+        null=True,
+        verbose_name="HIV status",
+    )
     # Graft
     procurement_date = models.DateField(
         blank=True,
@@ -430,18 +441,7 @@ class Transplant(UserScopedModel):
     delayed_graft_function = models.BooleanField(
         blank=True,
         null=True,
-        verbose_name="delayed graft function",
-    )
-    dgf_time = models.IntegerField(
-        blank=True,
-        null=True,
-        verbose_name="delayed graft function time",
-    )
-    dgf_time_units = models.CharField(
-        max_length=50,
-        blank=True,
-        choices=TimeUnits.choices,
-        verbose_name="delayed graft function time units",
+        verbose_name="delayed graft function (DGF)",
     )
     induction_therapy = models.CharField(
         max_length=100,
@@ -461,7 +461,7 @@ class Transplant(UserScopedModel):
         blank=True,
         max_length=50,
         choices=iDSAclass.choices,
-        verbose_name=" iDSA class",
+        verbose_name=" iDSA class", # temporary hack to prevent auto-capitalization
     )
     i_dsa_specificity = models.CharField(
         blank=True,
