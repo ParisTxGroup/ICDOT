@@ -146,8 +146,47 @@ Deployment
 
 The following details how to deploy this application.
 
-Docker
+
+Build
+^^^^^
+
+Building the images is done automatically by github actions once things are merged into master.
+
+Deploy
 ^^^^^^
+
+To deploy to ICDOT's secure host "Euris", the procedure is to connect following
+their procedure for your account, which should be::
+
+    $ sudo -i -u organx-srv
+
+Now, with those additional privileges, change directories and update the
+configuration by checking out the git repo::
+
+    $ cd /fs1/app/ICDOT/
+    $ git pull --ff-only
+
+The next step is to fetch the images from github. For this you need a
+Personal Access Token (PAT) from github or use your password directly.
+These will not be stored on the server. See https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens
+
+You can login and pull the images using::
+
+    $ docker login ghcr.io -u USERNAME --password-stdin
+    $ docker pull ghcr.io/paristxgroup/icdot_production_django:latest
+    $ docker pull ghcr.io/paristxgroup/icdot_production_histomx:latest
+
+Now run the stack::
+
+    $ docker-compose -f production_nodb_nossl.yml up --no-build -d
+
+If you have migrations, or other maintenance to do you can use::
+
+    $ docker-compose -f production_nodb_nossl.yml run --rm django python manage.py migrate
+    $ docker-compose -f production_nodb_nossl.yml run --rm django python manage.py createsuperuser
+
+Deep Dive
+^^^^^^^^^
 
 See detailed `cookiecutter-django Docker documentation`_.
 
