@@ -29,6 +29,22 @@ All of the documentation below applies, but when using docker-compose things wil
 
 If you need access to a debugger, for example when using `ipdb` you should use `... run --service-ports ...`.
 
+Working with Histomx
+^^^^^^^^^^^^^^^^^^^^
+
+This project (ICDOT) includes an environment for running things in R.
+This is used to provide the Histomx functionality.
+
+To run the project with Histomx we need to specify access to the Histomx repository:
+
+    $ HISTOMX_REPO_PATH=/path/to/histomx/repo docker-compose -f local_with_histomx.yml up
+
+
+For debuging things in R, the easiest might be starting a shell in histomx, then running R.
+
+    $ HISTOMX_REPO_PATH=/path/to/histomx/repo docker-compose -f local_with_histomx.yml run histomx bash
+    % R -e 'rmarkdown::render("/histomx/scripts/histomx_kidney.Rmd", output_file="/tmp/foo.html", params=list(rcc_file="/histomx/test_files/test.RCC", rna_file="/histomx/test_files/rna-test.json", patient_file="/histomx/test_files/patient-test.json"))'
+
 
 What is `pre-commit`
 ^^^^^^^^^^^^^^^^^^^
