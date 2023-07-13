@@ -79,7 +79,9 @@ class Transplant(UserScopedModel):
         ANCA = "ANCA vasculitis", _(
             "anti-neutrophil cytoplasmic autoantibody (ANCA) vasculitis"
         )
-        CAKUT = "CAKUT", _("congenital abnormality of the kidney or urinary tract (CAKUT)")
+        CAKUT = "CAKUT", _(
+            "congenital abnormality of the kidney or urinary tract (CAKUT)"
+        )
         CPN = "CPN", _("chronic progressive nephropathy (CPN)")
         C3_GLOMERULOPATHY = "complement 3 glomerulopathy", _(
             "complement 3 glomerulopathy"
@@ -111,8 +113,12 @@ class Transplant(UserScopedModel):
 
     class LivingDonorType(models.TextChoices):
         UNRELATED = "unrelated", _("unrelated donor")
-        RELATED_HLA_IDENTICAL = "related HLA identical", _("related HLA identical donor")
-        RELATED_HLA_NON_IDENTICAL = "related non-HLA identical", _("related non-HLA identical donor")
+        RELATED_HLA_IDENTICAL = "related HLA identical", _(
+            "related HLA identical donor"
+        )
+        RELATED_HLA_NON_IDENTICAL = "related non-HLA identical", _(
+            "related non-HLA identical donor"
+        )
 
     class DeceasedDonorType(models.TextChoices):
         DBD = "DBD", _("donation after brain death (DBD)")
@@ -200,7 +206,7 @@ class Transplant(UserScopedModel):
         choices=WeightUnits.choices,
     )
     recipient_sex = models.CharField(
-        max_length=1,
+        max_length=10,
         choices=Sex.choices,
         blank=True,
     )
@@ -297,7 +303,7 @@ class Transplant(UserScopedModel):
         verbose_name="donor age (years)",
     )
     donor_sex = models.CharField(
-        max_length=1,
+        max_length=10,
         choices=Sex.choices,
         blank=True,
     )
@@ -461,7 +467,7 @@ class Transplant(UserScopedModel):
         blank=True,
         max_length=50,
         choices=iDSAclass.choices,
-        verbose_name=" iDSA class", # temporary hack to prevent auto-capitalization
+        verbose_name=" iDSA class",  # temporary hack to prevent auto-capitalization
     )
     i_dsa_specificity = models.CharField(
         blank=True,

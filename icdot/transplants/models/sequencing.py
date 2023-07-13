@@ -8,6 +8,7 @@ from icdot.transplants.models.biopsy import Biopsy
 from icdot.transplants.models.file_upload import TrackFileUploadModel
 from icdot.users.models import UserScopedModel
 
+
 class SequencingData(UserScopedModel, TrackFileUploadModel):
     class Meta:
         verbose_name_plural = "sequencing data"

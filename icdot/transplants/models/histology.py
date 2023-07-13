@@ -42,7 +42,7 @@ class Histology(UserScopedModel):
         FROZEN = "frozen", _("frozen")
         PARAFFIN = "paraffin", _("paraffin")
         AFA = "AFA", _("acidified formal alcohol (AFA)")
-        #DO NOT allow 'other'; add options as needed
+        # DO NOT allow 'other'; add options as needed
 
     class FSGStype(models.TextChoices):
         CELLULAR = "cellular", _("cellular")
@@ -86,7 +86,9 @@ class Histology(UserScopedModel):
     class PTCML(models.TextChoices):
         NORMAL = "normal", _("normal (<3 layers)")
         MODERATE = "moderate ", _("3-6 layers")
-        SEVERE = "severe", _("≥7 layers in one cortical PTC and ≥5 layers in two additional capillaries")
+        SEVERE = "severe", _(
+            "≥7 layers in one cortical PTC and ≥5 layers in two additional capillaries"
+        )
 
     class StainingIntensity(models.TextChoices):
         ZERO = "0", _("0")
@@ -154,7 +156,9 @@ class Histology(UserScopedModel):
     class NonRejectionDx(models.TextChoices):
         NORMAL = "normal", _("normal biopsy or nonspecific changes")
         INADEQUATE = "inadequate", _("inadequate for  assessment of rejection")
-        REJECTION_ONLY = "rejection only", _("Rejection only-no additional pathological abnormalities")
+        REJECTION_ONLY = "rejection only", _(
+            "Rejection only-no additional pathological abnormalities"
+        )
         OTHER = "other", _("other pathology")
         GLOMERULAR_ISCHEMIA = "glomerular ischemia", _("glomerular ischemia")
         INFARCTION = "infarction", _("infarction")
@@ -163,7 +167,9 @@ class Histology(UserScopedModel):
         ATI_SUSP_CNIT = "ATI suspicious for CNIT", _("ATI suspicious for CNI toxicity")
         # (Thrombotic) microangiopathy (glomerular and/or arterial/arteriolar)
         TMA_NOS = "TMA NOS", _("TMA: not otherwise specified")
-        TMA_ACUTE_GI = "acute glomerular TMA", _("TMA: acute glomerular involvement on LM")
+        TMA_ACUTE_GI = "acute glomerular TMA", _(
+            "TMA: acute glomerular involvement on LM"
+        )
         TMA_SUBACUTE_ACUTE_GI = "subacute/chronic glomerular TMA", _(
             "TMA: subacute/chronic glomerular involvement on LM"
         )
@@ -214,16 +220,22 @@ class Histology(UserScopedModel):
         PVN_2 = "PVN class 2", _("Polyomavirus Nephropathy Class 2")
         PVN_3 = "PVN class 3", _("Polyomavirus Nephropathy Class 3")
         # glomerular disease
-        GD_NOS = "glomerular disease NOS", _("glomerular disease: not otherwise specified")
+        GD_NOS = "glomerular disease NOS", _(
+            "glomerular disease: not otherwise specified"
+        )
         GD_IC_NOS = "immune complex glomerular disease", _(
             "immune complex glomerular disease not otherwise specified"
         )
-        GD_IC_IGA = "immune complex IgA glomerular disease", _("immune complex IgA glomerular disease")
+        GD_IC_IGA = "immune complex IgA glomerular disease", _(
+            "immune complex IgA glomerular disease"
+        )
         IGAN = "IgA nephropathy", _("glomerular disease: IgA nephropathy")
         GD_IC_MEMBRANOUS = "immune complex membranous glomerular disease", _(
             "glomerular disease: immune complex, membranous"
         )
-        LUPUS = "lupus nephritis", _("immune complex glomerular disease: lupus nephritis")
+        LUPUS = "lupus nephritis", _(
+            "immune complex glomerular disease: lupus nephritis"
+        )
         GD_C3_G = "C3 glomerulopathy", _("glomerular disease: C3 glomerulopathy")
         GD_FSGS_NOS = "FSGS", _("glomerular disease: FSGS")
         GD_FSGS_RECUR = "recurrent FSGS", _("recurrent FSGS")
