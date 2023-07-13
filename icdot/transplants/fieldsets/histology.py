@@ -61,7 +61,7 @@ DEFAULT = (
         {
             "classes": ("collapse",),
             "fields": (
-                "crescents",
+                "crescent_score",
                 "glomerular_thrombi",
                 "arterial_thrombi",
                 "plasma_cell_if",

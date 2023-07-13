@@ -13,29 +13,38 @@ class SequencingData(UserScopedModel, TrackFileUploadModel):
     class Meta:
         verbose_name_plural = "sequencing data"
 
-    class RunProtocol(models.TextChoices):
-        SENSITIVE = "high sensitivity", _("high sensitivity")
-        STANDARD = "standard", _("standard")
-
-    class RNAstorage(models.TextChoices):
+    class TissueStorage(models.TextChoices):
         FFPE = "FFPE", _("FFPE")
         RNALATER = "RNAlater", _("RNAlater")
         FROZEN = "frozen", _("frozen")
+
+    class MachineType(models.TextChoices):
+        FLEX = "max/flex", _("max/flex")
+        SPRINT = "sprint", _("sprint")
+
+    class RunProtocol(models.TextChoices):
+        SENSITIVE = "high sensitivity", _("high sensitivity")
+        STANDARD = "standard", _("standard")
 
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     biopsy = models.ForeignKey(Biopsy, null=True, on_delete=models.SET_NULL)
 
     sequencing_date = models.DateField()
+    tissue_fixation = models.CharField(
+        max_length=100,
+        choices=TissueStorage.choices,
+        default=TissueStorage.FFPE,
+        verbose_name="tissue storage",
+    )
+    machine_type = models.CharField(
+        blank=True,
+        max_length=50,
+        choices=MachineType.choices,
+    )
     run_protocol = models.CharField(
         blank=True,
         max_length=50,
         choices=RunProtocol.choices,
-    )
-    rna_storage = models.CharField(
-        max_length=100,
-        choices=RNAstorage.choices,
-        default=RNAstorage.FFPE,
-        verbose_name="RNA storage",
     )
     rna_concentration = models.FloatField(
         validators=[MinValueValidator(0.0), MaxValueValidator(10000.0)],
